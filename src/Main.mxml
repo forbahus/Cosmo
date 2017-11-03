@@ -64,7 +64,7 @@
 			
 			private function timerHandler(e:TimerEvent):void
 			{
-				//lbl1.text = "w=" + this.width + " h=" + this.height;
+				lbl1.text = world.status;
 			}
         ]]>
 	</fx:Script>

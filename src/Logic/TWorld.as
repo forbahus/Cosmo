@@ -8,6 +8,7 @@ package Logic
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	import Logic.TShip;
 	import Logic.TMeteorite;
@@ -24,8 +25,10 @@ package Logic
 		{
 			k = 0;
 			
-			addEventListener(Event.ADDED_TO_STAGE, onAdded);
+			mouseEnabled = true;
 			
+			addEventListener(Event.ADDED_TO_STAGE, onAdded);
+			addEventListener(MouseEvent.MOUSE_DOWN, onClick);
 			return;
 		}
 		public function onAdded(event:Event):void
@@ -41,13 +44,17 @@ package Logic
 		private function timerHandler(e:TimerEvent):void
 		{
 			k++;
-			if (k == 3 )
+			if (k == 1 )
 			{
 				var meteor:TMeteorite = new TMeteorite();
 				stage.addChild(meteor);
 			}
-			status = "k=" + k;
+			//status = "k=" + k;
         }
+		public function onClick(event:MouseEvent):void
+		{
+			status = "clicked";
+		}
 	}
 
 }

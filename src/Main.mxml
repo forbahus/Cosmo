@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+			   creationComplete="creationCompleteHandler(event)"
+			   applicationComplete="applicationCompleteHandler(event)" width="800" height="600"
+			   preloader="Components.TPreloader" backgroundColor="0x000020">
+	
+	<fx:Declarations>
+	</fx:Declarations>
+	
+	<s:layout>
+        <s:BasicLayout />
+    </s:layout>
+	
+	<mx:Label text="Hello World!" fontSize="21" letterSpacing="1" id="lbl1" fontFamily="Constantia">
+      <mx:filters>
+         <mx:GlowFilter color="#ffffdd" blurX="4" blurY="4" />
+      </mx:filters>
+   </mx:Label>
+	
+	<fx:Script>
+        <![CDATA[
+			import flash.display.DisplayObject;
+            import mx.events.FlexEvent;
+			import Logic.TKongregateAPI;
+            import Logic.TWorld;
+			import org.osmf.containers.MediaContainer;
+			
+			import flash.display.Sprite;
+			import flash.utils.Timer;
+			import flash.events.TimerEvent;
+			import flash.text.TextField;
+			import flash.text.TextFieldType;
+			import mx.core.UIComponent;
+	
+			import flash.text.TextFieldAutoSize;
+			
+			private var myTimer:Timer;
+			private var world:TWorld;
+			public var kongregate:TKongregateAPI;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+			}
+            protected function applicationCompleteHandler(event:FlexEvent):void
+            {
+				kongregate = new TKongregateAPI();
+				
+				stage.addChild(kongregate);
+				
+				kongregate.APILoad();
+				
+				world = new TWorld();
+				world.width = stage.width;
+				world.height = stage.height;
+				stage.addChild(world);
+				
+				myTimer = new Timer(10);
+				myTimer.start();
+				
+				myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
+            }
+			
+			private function timerHandler(e:TimerEvent):void
+			{
+				//lbl1.text = "w=" + this.width + " h=" + this.height;
+			}
+        ]]>
+	</fx:Script>
+	
+</s:Application>

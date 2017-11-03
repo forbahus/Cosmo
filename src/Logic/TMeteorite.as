@@ -4,6 +4,9 @@ package Logic
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
+	import Math;
 	/**
 	 * ...
 	 * @author 
@@ -13,6 +16,8 @@ package Logic
 		[Embed(source = "../../images/meteor.png")]
 		private var meteorClass:Class;
 		private var meteorSprite:Bitmap = new meteorClass();
+		
+		private var myTimer:Timer;
 		
 		public function TMeteorite() 
 		{
@@ -24,27 +29,33 @@ package Logic
 		}
 		public function onAdded(event:Event):void
 		{
-			this.width = 150;
-			this.height = 150;
-			this.x = 100;
-			this.y = 100;
-			meteorSprite.x = 100;
-			meteorSprite.y = 100;
+			meteorSprite.x = Math.random() * stage.width;
 			
-			meteorSprite.width = 50;
-			meteorSprite.height = 50;
+			meteorSprite.width = 30;
+			meteorSprite.height = 30;
+
+			
+			myTimer = new Timer(10);
+			myTimer.start();
+			
+			myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
+
 			
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onClick);
-			
 			stage.addChild(meteorSprite);
 		}
 		public function onClick(event:MouseEvent):void
 		{
 			stage.removeChild(meteorSprite);
 		}
+		private function timerHandler(e:TimerEvent):void
+		{
+			meteorSprite.y += 2;
+			if (meteorSprite.y > stage.height)
+				stage.removeChild(meteorSprite);
+		}
 		public function destroy():void
 		{
-			
 		}
 	}
 

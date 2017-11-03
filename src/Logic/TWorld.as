@@ -20,7 +20,6 @@ package Logic
 		public var status:String;
 		public var ship:TShip;
 		
-		
 		public function TWorld() 
 		{
 			k = 0;
@@ -44,7 +43,7 @@ package Logic
 		private function timerHandler(e:TimerEvent):void
 		{
 			k++;
-			if (k == 1 )
+			if (k % 3== 1 )
 			{
 				var meteor:TMeteorite = new TMeteorite();
 				stage.addChild(meteor);
